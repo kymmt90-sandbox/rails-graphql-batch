@@ -4,11 +4,11 @@ class Loaders::HasManyAssociationLoader < GraphQL::Batch::Loader
     @owner_key = owner_key
   end
 
-  def perform(owner_ids)
-    records = @owned_model_name.where(@owner_key => owner_ids)
-    owner_ids.each do |owner_id|
-      owned_records = records.select { |r| r.public_send(@owner_key) == owner_id }
-      fulfill(owner_id, owned_records)
+  def perform(owner_ids_array)
+    records = @owned_model_name.where(@owner_key => owner_ids_array.flatten.uniq)
+    owner_ids_array.each do |owner_ids|
+      owned_records = records.select { |r| owner_ids.include?(r.public_send(@owner_key)) }
+      fulfill(owner_ids, owned_records)
     end
   end
 end
