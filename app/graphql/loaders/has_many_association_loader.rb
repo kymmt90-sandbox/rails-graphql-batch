@@ -1,4 +1,4 @@
-class HasManyAssociationLoader < GraphQL::Batch::Loader
+class Loaders::HasManyAssociationLoader < GraphQL::Batch::Loader
   def initialize(owned_model_name, owner_key)
     @owned_model_name = owned_model_name
     @owner_key = owner_key
