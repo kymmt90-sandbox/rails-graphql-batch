@@ -1,5 +1,3 @@
-require_relative '../loaders/has_many_association_loader'
-
 Types::CustomerType = GraphQL::ObjectType.define do
   name 'Customer'
 
