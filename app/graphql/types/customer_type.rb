@@ -10,7 +10,7 @@ Types::CustomerType = GraphQL::ObjectType.define do
   connection :deliverers, Types::DelivererType.connection_type do
     resolve ->(customer, args, ctx) {
       Loaders::HasManyAssociationLoader.for(Order, :customer_id).load([customer.id]).then do |orders|
-        Loaders::HasManyAssociationLoader.for(Deliverer, :id).load(orders.map(&:deliverer_id))
+        Loaders::RecordLoader.for(Deliverer).load_many(orders.map(&:deliverer_id))
       end
     }
   end
