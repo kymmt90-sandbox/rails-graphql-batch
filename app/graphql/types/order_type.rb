@@ -7,4 +7,9 @@ Types::OrderType = GraphQL::ObjectType.define do
       Loaders::RecordLoader.for(Customer).load(order.customer)
     }
   end
+  field :deliverer, !Types::DelivererType  do
+    resolve ->(order, args, ctx) {
+      Loaders::RecordLoader.for(Deliverer).load(order.deliverer)
+    }
+  end
 end
