@@ -4,5 +4,5 @@ class Customer < ApplicationRecord
   belongs_to :user
 
   has_many :orders
-  has_many :deliverer, through: :orders
+  has_many :deliverers, through: :orders
 end
